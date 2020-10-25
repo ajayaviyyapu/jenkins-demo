@@ -1,0 +1,25 @@
+plugins {
+  id "base"
+  id "com.palantir.docker" version "0.25.0"
+  id "com.palantir.docker-run" version "0.25.0"
+  id "pl.allegro.tech.build.axion-release" version "1.12.1"
+}
+
+project.version = scmVersion.version
+
+// Build a Docker Image with the dependencies required for the image present in plugins.txt file
+docker{
+   name "${project.name}:${project.version}"
+   files "plugins.txt"
+}
+
+// Run the Docker Image as a Container. 
+// clean - true When the docker container is stopped 
+// daemonize false - logoutput will directly come onto console  
+dockerRun{
+	name "${project.name}"
+	image "${project.name}:${project.version}"
+	ports "8080:8086"
+	clean true 
+	daemonize false
+}
