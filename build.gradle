@@ -10,7 +10,7 @@ project.version = scmVersion.version
 // Build a Docker Image with the dependencies required for the image present in plugins.txt file
 docker{
    name "${project.name}:${project.version}"
-   files "plugins.txt"
+   files "plugins.txt","seedJob.xml"
 }
 
 // Run the Docker Image as a Container. 
